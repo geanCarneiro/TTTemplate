@@ -1,0 +1,12 @@
+
+src/ACCESSTOKEN
+
+src/twitter4j.properties
+
+src/twitter4j_bk.properties
+
+bin/ACCESSTOKEN
+
+bin/twitter4j.properties
+
+bin/twitter4j_bk.properties

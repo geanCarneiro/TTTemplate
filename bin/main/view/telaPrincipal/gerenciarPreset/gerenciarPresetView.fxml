@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+
+<BorderPane styleClass="root"
+    xmlns:fx="http://javafx.com/fxml"  minWidth="500">
+	<padding><Insets top="25" right="25" bottom="25" left="25"/></padding>
+	<top>
+    	<Text text="Gerenciar Presets" />
+    </top>
+	<center>
+		<StackPane>
+		<padding><Insets top="10" right="10" bottom="10" left="10"/></padding>
+		
+		    <TreeView styleClass="list" fx:id="presetList"
+		    	GridPane.columnIndex="0" GridPane.rowIndex="0"
+		        GridPane.columnSpan="3" GridPane.rowSpan="5" />
+				
+		</StackPane>
+	</center>
+	<right>
+		<BorderPane>
+		<padding><Insets top="10" right="10" bottom="10" left="10"/></padding>
+			<top>
+				<VBox spacing="5">
+					<Button text="Incluir" prefWidth="70" />
+					<Button text="Alterar" prefWidth="70" />
+					<Button text="Remover" prefWidth="70" />
+				</VBox>
+			</top>
+			<bottom>
+				<VBox spacing="5">
+					<Button text="Salvar" prefWidth="70" onAction="#doSalvar"  />
+					<Button text="Cancelar" prefWidth="70" onAction="#doCancelar" />
+				</VBox>
+			</bottom>
+		</BorderPane>
+	</right>
+        
+
+</BorderPane>
+

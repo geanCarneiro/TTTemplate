@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="lib" path="B:/tools/twitter4j-4.0.7/lib/twitter4j-core-4.0.7.jar" sourcepath="B:/tools/twitter4j-4.0.7/twitter4j-core/src">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/B:/tools/twitter4j-4.0.7/twitter4j-core/twitter4j-core-4.0.7-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="B:/tools/jp.takke.twitter4j-v2-1.1.0.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JavaFX17"/>
+	<classpathentry kind="lib" path="B:/tools/jackson/jackson-annotations-2.12.3.jar"/>
+	<classpathentry kind="lib" path="B:/tools/jackson/jackson-core-2.12.3.jar"/>
+	<classpathentry kind="lib" path="B:/tools/jackson/jackson-databind-2.12.3.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/POI"/>
+	<classpathentry kind="lib" path="B:/tools/twitter4j-4.0.7/lib/twitter4j-async-4.0.7.jar" sourcepath="B:/tools/twitter4j-4.0.7/twitter4j-async/src">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/B:/tools/twitter4j-4.0.7/twitter4j-async/twitter4j-async-4.0.7-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

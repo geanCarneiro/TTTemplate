@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane fx:id="rootPane" fx:controller="main.view.telaPrincipal.TelaPrincipalController" styleClass="root"
+	    xmlns:fx="http://javafx.com/fxml">
+   <top>
+   		<StackPane>
+   			<padding><Insets top="25" right="25" bottom="25" left="25"/></padding>
+   			
+   			<Text id="welcome-text" text="TWITTER PRESETS" />
+   		</StackPane>
+   </top>
+   <left>
+   		<BorderPane>
+	   		<top>
+		   		<VBox spacing="5" prefWidth="175">
+		   			<padding><Insets top="10" right="25" bottom="25" left="25"/></padding>
+		   			<Pane>
+					    <Button fx:id="btnConnectar" text="Conectar ao Twitter..." onAction="#connectar"/>
+					    <Button fx:id="btnDesconectar" text="Desconectar do Twitter" onAction="#desconectar" />
+				    </Pane>
+				    <Button styleClass="verifyConnection" text="Tweet em massa" onAction="#tweetEmMassa"/>
+				    <Button text="Gerenciar Presets..." onAction="#doGerenciarPreset" />
+			    </VBox>
+		  	</top>
+		  	<bottom>
+		  		<VBox spacing="5" prefWidth="175">
+		   			<padding><Insets top="10" right="25" bottom="25" left="25"/></padding>
+				    <Button text="🔃" onAction="#recarregarDados"/>
+			    </VBox>
+		  	</bottom>
+		  </BorderPane>
+	</left>
+	<center>
+		<StackPane>
+		<padding><Insets top="10" right="10" bottom="10" left="10"/></padding>
+		
+		    <TreeView styleClass="list" fx:id="presetList"
+		    	GridPane.columnIndex="0" GridPane.rowIndex="0"
+		        GridPane.columnSpan="3" GridPane.rowSpan="5" />
+				
+		</StackPane>
+	</center>
+	<bottom>
+		<HBox styleClass="statusBar">
+			<padding><Insets top="5" right="5" bottom="5" left="5"/></padding>
+			<Text fx:id="txtStatusConectado" text="null"/>
+		</HBox>
+	</bottom>
+	<stylesheets>
+		<URL value="@style.css" />
+	</stylesheets>
+</BorderPane>
+
