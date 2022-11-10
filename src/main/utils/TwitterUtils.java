@@ -8,6 +8,11 @@ import java.io.InputStreamReader;
 import java.net.URI;
 import java.util.Optional;
 
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
 import main.Main;
 import twitter4j.Poll;
@@ -145,6 +150,11 @@ public class TwitterUtils {
 		      in.setHeaderText(null);
 		      in.setTitle("Autorização do Twitter");
 		      in.setContentText("Insira o pin gerado pelo Twitter: ");
+		      
+		      Button btn = (Button) in.getDialogPane().lookupButton(ButtonType.OK);
+		      TextField field = in.getEditor();
+		      BooleanBinding invalido = Bindings.createBooleanBinding(() -> field.getText().isEmpty(), field.textProperty());
+		      btn.disableProperty().bind(invalido);
 		      
 		      Optional<String> result = in.showAndWait();
 		      if (result.isPresent()) {
