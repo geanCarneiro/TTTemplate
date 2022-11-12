@@ -1,5 +1,6 @@
 package main.utils;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -14,6 +15,8 @@ import java.util.stream.Collectors;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.json.JsonMapper;
 
 import main.Main;
 
@@ -115,6 +118,31 @@ public class FileResourceUtils {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
+		}
+		
+	}
+	
+	public static void saveObjectToJson(String jsonFile, Object obj) {
+		if(!jsonFile.split("[.]")[1].equalsIgnoreCase("json")) {
+			System.err.println(jsonFile + " não é um arquivo Json");
+			return;
+		}
+		
+		File arquivoJson = getFileFromPath(jsonFile);
+		
+		saveObjectToJson(arquivoJson, obj);
+		
+	}
+	
+	public static void saveObjectToJson(File jsonFile, Object obj) {
+		
+		JsonMapper mapper = new JsonMapper();
+		mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
+		try {
+			mapper.writeValue(jsonFile, obj);
+		} catch (IOException ex) {
+			ex.printStackTrace();
+			return;			
 		}
 		
 	}

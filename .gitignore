@@ -12,3 +12,5 @@ bin/twitter4j.properties
 bin/twitter4j_bk.properties
 
 bin/
+
+src/presets.json

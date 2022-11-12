@@ -54,36 +54,24 @@ public class Main extends Application{
 	
 	private static void criarTemplatePadrao(File file) {
 		
-		JsonMapper mapper = new JsonMapper();
-		mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
-		try {
-			mapper.writeValue(file, Arrays.asList(
-						new TweetPresetNode("Exemplos de Preset", Arrays.asList(
-									new TweetPresetNode("Aniversario", "{nome:lnome} fez {idade:n} no dia {aniversario:ddd/MM} e comeu {o_que_ele_comeu}", true),
-									new TweetPresetNode("dia do feriado", "{dia:d} será {feriado}", false)
-								))
-					));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return;
-		}
+		List<TweetPresetNode> templatePadrao =  Arrays.asList(
+				new TweetPresetNode("Exemplos de Preset", Arrays.asList(
+						new TweetPresetNode("Aniversario", "{nome:lnome} fez {idade:n} no dia {aniversario:ddd/MM} e comeu {o_que_ele_comeu}", true),
+						new TweetPresetNode("dia do feriado", "{dia:d} será {feriado}", false)
+					))
+		);
+		
+		FileResourceUtils.saveObjectToJson(file, templatePadrao);
 		
 	}
 
 	private static void criarListaPadrao(File file) {
-				
-		JsonMapper mapper = new JsonMapper();
-		mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
-		try {
-			mapper.writeValue(file, Arrays.asList(
-						new ListaNomeada("nome", Arrays.asList("Gean", "Felipe", "André"))
-					));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return;
-		}
+		
+		List<ListaNomeada> listaPadrao = Arrays.asList(
+				new ListaNomeada("nome", Arrays.asList("Gean", "Felipe", "André"))
+			);
+		
+		FileResourceUtils.saveObjectToJson(file, listaPadrao);
 		
 	}
 

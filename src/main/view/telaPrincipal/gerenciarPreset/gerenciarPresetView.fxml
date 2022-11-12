@@ -27,14 +27,15 @@
 		<BorderPane>
 		<padding><Insets top="10" right="10" bottom="10" left="10"/></padding>
 			<top>
-				<VBox spacing="5">
-					<Button text="Incluir" prefWidth="70" />
+				<VBox spacing="5" alignment="CENTER_RIGHT">
+					<Button text="Incluir Pasta" prefWidth="125" onAction="#doIncluirPasta" />
+					<Button text="Incluir Preset" prefWidth="125" />
 					<Button text="Alterar" prefWidth="70" />
 					<Button text="Remover" prefWidth="70" />
 				</VBox>
 			</top>
 			<bottom>
-				<VBox spacing="5">
+				<VBox spacing="5" alignment="CENTER_RIGHT">
 					<Button text="Salvar" prefWidth="70" onAction="#doSalvar"  />
 					<Button text="Cancelar" prefWidth="70" onAction="#doCancelar" />
 				</VBox>

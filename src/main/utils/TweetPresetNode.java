@@ -1,6 +1,9 @@
 package main.utils;
 
+import java.util.Arrays;
 import java.util.List;
+
+import org.apache.commons.compress.utils.Lists;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -64,6 +67,13 @@ public class TweetPresetNode {
 				node.parent = this;
 			}
 		}
+	}
+	
+	public void addPreset(TweetPresetNode node) {
+		if (this.presets == null) this.presets = Arrays.asList();
+		
+		this.presets.add(node);
+		node.parent = this;
 	}
 	
 	public boolean isMidia() {
