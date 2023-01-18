@@ -25,6 +25,7 @@ public class FileResourceUtils {
 	public static final String PRESET_FILE = "presets.json";
 	public static final String LISTAS_FILE = "listas.json";
 	public static final String ACCESS_TOKEN_FILE = "ACCESSTOKEN";
+	public static final String LOGO_FILE = "twitter.png";
 	
 	
 	public static List<TweetPresetNode> loadPreset() {
@@ -77,9 +78,12 @@ public class FileResourceUtils {
 		
 		if(listas.size() > 0) {
 			
-			return listas.stream()
+			List<ListaNomeada> listasFiltrada = listas.stream()
 					.filter(lista -> lista.getNome().equalsIgnoreCase(nome))
-					.collect(Collectors.toList()).get(0);
+					.collect(Collectors.toList());
+			
+			if(listasFiltrada.size() > 0) 
+				return listasFiltrada.get(0);			 
 			
 		}
 		

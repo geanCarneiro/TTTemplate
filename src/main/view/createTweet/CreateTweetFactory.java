@@ -5,7 +5,9 @@ import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import main.utils.FileResourceUtils;
 import main.utils.TweetPreset;
 
 public class CreateTweetFactory {
@@ -20,6 +22,7 @@ public class CreateTweetFactory {
 			
 			
 			Stage stage = new Stage();
+			stage.getIcons().add(new Image(FileResourceUtils.getFileFromPath(FileResourceUtils.LOGO_FILE).getAbsolutePath()));
 			stage.setScene(new Scene(root));
 			stage.setTitle("Criar Tweet");
 			stage.setResizable(false);

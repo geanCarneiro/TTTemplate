@@ -14,6 +14,7 @@ import java.util.concurrent.Executors;
 
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
+import javafx.beans.binding.StringBinding;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -45,6 +46,8 @@ public class CreateTweetController {
 	
 	private int charCount;
 	
+	private Text txtQtMidia;
+	
 	private HashMap<String, Node> campos = new HashMap<>();
 	
 	public CreateTweetController(TweetPreset preset) {
@@ -64,6 +67,9 @@ public class CreateTweetController {
 	
 	@FXML
 	private Text txtTweet;
+	
+	@FXML
+	private Button btnGerarTweet;
     
 	@FXML
 	public void initialize() {
@@ -85,7 +91,8 @@ public class CreateTweetController {
 					rawLabel = p.getLabel();
 					input = new ComboBox<String>();
 					((ComboBox<String>) input).setItems(FXCollections.observableArrayList( ( List<String> ) p.getData() ) );
-					((ComboBox<String>) input).setValue( (( List<String> ) p.getData()).get(0) );
+					List<String> lista = ( List<String> ) p.getData();
+					if(lista.size() > 0) ((ComboBox<String>) input).setValue( lista.get(0) );
 					((ComboBox<String>) input).setOnAction(e -> updateCountText() );
 					break;
 				case NUMBER:
@@ -155,9 +162,9 @@ public class CreateTweetController {
 		if(this.preset.getMidia()) {
 			Text txtLabel = new Text("Midia: ");
 			GridPane.setValignment(txtLabel, VPos.CENTER);
-			Text txtQtMidia = new Text("Nenhum arquivo carregado...");
+			txtQtMidia = new Text("Nenhum arquivo carregado...");
 			GridPane.setValignment(txtQtMidia, VPos.CENTER);
-			Button btnCarregar = new Button("Carregar...");
+			Button btnCarregar = new Button("Carregar...");			
 			btnCarregar.setOnAction(value ->  {
 				FileChooser fileChooser = new FileChooser();
 				fileChooser.setTitle("Carregar Midia");
@@ -170,8 +177,7 @@ public class CreateTweetController {
 			});
 			Button btnLimpar = new Button("Limpar");
 			btnLimpar.setOnAction(value ->  {
-				this.midias = null;
-				txtQtMidia.setText("Nenhum arquivo carregado...");
+				limparMidia();
 				
 			});
 			createTweetForm.addRow(rowIndex, txtLabel, txtQtMidia, btnCarregar, btnLimpar);
@@ -179,6 +185,7 @@ public class CreateTweetController {
 		}
 		
 		this.txtTweet.setText(this.preset.getPath());
+		this.btnGerarTweet.setDisable(!Main.isConectado());
 		updateCountText();
 	}
 	
@@ -186,48 +193,86 @@ public class CreateTweetController {
 	private void gerarTweet(ActionEvent event) {
 				
 		Executors.newSingleThreadExecutor().execute(() -> {
-			String encodedTweet = doEncode();
-			String tweet = checkUpper.isSelected() ? TweetPresetFactory.toTweetUpperCase(encodedTweet) : encodedTweet;
-			if(Main.isConectado()) {
-				try {
-					if(this.midias == null || this.midias.size() == 0) {
-						TwitterUtils.twittar(tweet);
-					} else { 
-						
-						if (this.midias.size() == 1) {
-							if(isImage(this.midias.get(0)))
-								TwitterUtils.twittarComImagem(tweet, this.midias.get(0));
-							else if(isVideo(this.midias.get(0)))
-								TwitterUtils.twittarComVideo(tweet, this.midias.get(0));
-							else {
-								Platform.runLater(() -> AlertFactory.createInformationAlert("ATENÇÃO!! O ARQUIVO QUE VAI POSTAR DEVE SER UMA IMAGEM OU UM VIDEO!!")) ;
-								return;
-							}
-						} else {
-							boolean isVideo = true;
-							for(File f: this.midias) {
-								if(!isVideo(f)) isVideo = false;
-							}
-							if(isVideo)
-								TwitterUtils.twittarComVariosVideos(tweet, this.midias.toArray(new File[0]));
-							else {
-								Platform.runLater(() -> AlertFactory.createInformationAlert("ATENÇÃO!! TODOS OS ARQUIVOS A POSTAR DEVEM SER VIDEOS!!"));
-								return;
-							}
+		String encodedTweet = doEncode();
+		String tweet = checkUpper.isSelected() ? TweetPresetFactory.toTweetUpperCase(encodedTweet) : encodedTweet;
+			try {
+				if(this.midias == null || this.midias.size() == 0) {
+					TwitterUtils.twittar(tweet);
+				} else { 
+					
+					if (this.midias.size() == 1) {
+						if(isImage(this.midias.get(0)))
+							TwitterUtils.twittarComImagem(tweet, this.midias.get(0));
+						else if(isVideo(this.midias.get(0)))
+							TwitterUtils.twittarComVideo(tweet, this.midias.get(0));
+						else {
+							Platform.runLater(() -> AlertFactory.createInformationAlert("ATENÇÃO!! O ARQUIVO QUE VAI POSTAR DEVE SER UMA IMAGEM OU UM VIDEO!!")) ;
+							return;
+						}
+					} else {
+						boolean isVideo = true;
+						for(File f: this.midias) {
+							if(!isVideo(f)) isVideo = false;
+						}
+						if(isVideo)
+							TwitterUtils.twittarComVariosVideos(tweet, this.midias.toArray(new File[0]));
+						else {
+							Platform.runLater(() -> AlertFactory.createInformationAlert("ATENÇÃO!! TODOS OS ARQUIVOS A POSTAR DEVEM SER VIDEOS!!"));
+							return;
 						}
 					}
-					Platform.runLater(() -> AlertFactory.createInformationAlert("Tweet feito com sucesso!!"));
-				} catch (Exception e) {
-					e.printStackTrace();
-					Platform.runLater(() -> AlertFactory.createErrorAlert("Erro ao postar Tweet!!"));
 				}
-			} else {
-				StringSelection selection = new StringSelection(tweet);
-				Toolkit.getDefaultToolkit().getSystemClipboard().setContents(selection, selection);
-				Platform.runLater(() -> AlertFactory.createInformationAlert("Tweet copiado com sucesso!!"));
+				Platform.runLater(() -> AlertFactory.createInformationAlert("Tweet feito com sucesso!!"));
+			} catch (Exception e) {
+				e.printStackTrace();
+				Platform.runLater(() -> AlertFactory.createErrorAlert("Erro ao postar Tweet!!"));
 			}
+			
+			limparCampos();
 		});
 		
+	}
+	
+	@FXML
+	private void CopiarTweet(ActionEvent event) {
+				
+		Executors.newSingleThreadExecutor().execute(() -> {
+			String encodedTweet = doEncode();
+			String tweet = checkUpper.isSelected() ? TweetPresetFactory.toTweetUpperCase(encodedTweet) : encodedTweet;
+			StringSelection selection = new StringSelection(tweet);
+			Toolkit.getDefaultToolkit().getSystemClipboard().setContents(selection, selection);
+			Platform.runLater(() -> AlertFactory.createInformationAlert("Tweet copiado com sucesso!!"));
+			
+			
+			limparCampos();
+		});
+		
+	}
+	
+	private void limparCampos() {
+		
+		for(Node n : this.campos.values()) {
+			if (n instanceof TextField) {
+				((TextField) n).setText("");
+			} else if (n instanceof ComboBox) {
+				if(((ComboBox) n).getItems().size() > 0) ((ComboBox) n).setValue( ((ComboBox) n).getItems().get(0) );
+			} else if (n instanceof Spinner) {
+				((Spinner) n).getValueFactory().setValue(0);
+			} else if (n instanceof TextArea) {
+				((TextArea) n).setText("");
+			} else if (n instanceof DatePicker) {
+				((DatePicker) n).setValue(LocalDate.now());
+			}
+		}
+		
+		if(this.preset.getMidia()) limparMidia();
+		
+		
+	}
+	
+	private void limparMidia() {
+		this.midias = null;
+		txtQtMidia.setText("Nenhum arquivo carregado...");
 	}
 	
 	private boolean isImage(File f) {

@@ -46,7 +46,7 @@ public class TweetPresetFactory {
 				if(!out.contains(new Param(infos[1].substring(1)))) {
 					List<Object> lista = FileResourceUtils.getLista(infos[1].toLowerCase().substring(1)).getLista();
 					lista.forEach(item -> {
-						((LinkedHashMap) item).put("listName", infos[1].toLowerCase().substring(1));
+						((LinkedHashMap) item).put("listName", infos[1].substring(1));
 					});
 					
 					out.add(new Param(infos[0], ParamTypeEnum.OBJECT, lista));

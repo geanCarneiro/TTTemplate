@@ -1,4 +1,4 @@
-package main.view.telaPrincipal.gerenciarPreset;
+package main.view.telaPrincipal.gerenciarPreset.incluirPreset;
 
 import java.io.IOException;
 import java.util.List;
@@ -12,28 +12,31 @@ import main.utils.FileResourceUtils;
 import main.utils.TweetPreset;
 import main.utils.TweetPresetNode;
 import main.view.telaPrincipal.TelaPrincipalController;
+import main.view.telaPrincipal.gerenciarPreset.GerenciarPresetController;
 
-public class GerenciarPresetFactory {
-	
-	public static void createView(List<TweetPresetNode> presets, TelaPrincipalController pai) {
+public class IncluirPresetFactory {
+
+	public static TweetPreset createView(List<TweetPresetNode> presets, GerenciarPresetController pai) {
 		try {
-			
-			FXMLLoader fxmlLoader = new FXMLLoader(GerenciarPresetFactory.class.getResource("gerenciarPresetView.fxml"));
-			fxmlLoader.setController(new GerenciarPresetController(presets, pai));
-			
-			Parent root = (Parent)fxmlLoader.load();
-			
-			
+
+			FXMLLoader fxmlLoader = new FXMLLoader(
+					IncluirPresetFactory.class.getResource("incluirPresetView.fxml"));
+			fxmlLoader.setController(new IncluirPresetController(presets, pai));
+
+			Parent root = (Parent) fxmlLoader.load();
+
 			Stage stage = new Stage();
 			stage.getIcons().add(new Image(FileResourceUtils.getFileFromPath(FileResourceUtils.LOGO_FILE).getAbsolutePath()));
 			stage.setScene(new Scene(root));
-			stage.setTitle("Gerenciar Preset");
+			stage.setTitle("Incluir Preset");
 			stage.setResizable(false);
-			stage.show();
+			stage.showAndWait();
+			return IncluirPresetController.response;
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return;
+			return null;
 		}
 	}
 

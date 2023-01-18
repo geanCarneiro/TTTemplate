@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+
+<BorderPane styleClass="root"
+    xmlns:fx="http://javafx.com/fxml"  minWidth="500">
+	<padding><Insets top="25" right="25" bottom="25" left="25"/></padding>
+	<top>
+    	<Text text="Incluir Preset" />
+    </top>
+	<center>
+		<VBox spacing="20">
+			<HBox  spacing="5">
+				<Text text="Nome: " />
+				<TextField prefColumnCount="10"/>
+			</HBox>				
+		</VBox>
+	</center>
+        
+
+</BorderPane>
+

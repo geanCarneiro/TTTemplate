@@ -29,7 +29,7 @@
 			<top>
 				<VBox spacing="5" alignment="CENTER_RIGHT">
 					<Button text="Incluir Pasta" prefWidth="125" onAction="#doIncluirPasta" />
-					<Button text="Incluir Preset" prefWidth="125" />
+					<Button text="Incluir Preset" prefWidth="125" onAction="#doIncluirPreset"  />
 					<Button text="Alterar" prefWidth="70" />
 					<Button text="Remover" prefWidth="70" />
 				</VBox>

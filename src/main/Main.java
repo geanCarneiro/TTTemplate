@@ -48,7 +48,8 @@ public class Main extends Application{
 		
 		Main.listas = FileResourceUtils.getListas();
 		Main.presets = FileResourceUtils.loadPreset();
-		launch();
+		Application.launch(Main.class);
+//		launch();
 		
 	}
 	

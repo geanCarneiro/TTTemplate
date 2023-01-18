@@ -6,8 +6,10 @@ import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import main.utils.FileResourceUtils;
 import main.utils.TweetPreset;
 
 public class TweetEmMassaImportFactory {
@@ -22,6 +24,7 @@ public class TweetEmMassaImportFactory {
 			
 			
 			Stage stage = new Stage();
+			stage.getIcons().add(new Image(FileResourceUtils.getFileFromPath(FileResourceUtils.LOGO_FILE).getAbsolutePath()));
 			stage.initStyle(StageStyle.UTILITY);
 			stage.setScene(new Scene(root));
 			stage.setTitle("Tweet Em Massa");

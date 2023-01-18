@@ -25,8 +25,10 @@
 	    <Text fx:id="counter"
 	    	GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.halignment="RIGHT" />
 	    	
-	    <Button text="Gerar Tweet" onAction="#gerarTweet" 
-	    	GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.columnSpan="2" GridPane.halignment="CENTER"/>
+	    <HBox spacing="10" GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.columnSpan="2" alignment="CENTER">
+		    <Button fx:id="btnGerarTweet" text="Gerar Tweet" onAction="#gerarTweet" />
+	    	<Button text="Copiar Tweet" onAction="#CopiarTweet" />
+	    </HBox>
 		
 
 </GridPane>

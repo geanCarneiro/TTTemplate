@@ -1,4 +1,4 @@
-package main.view.telaPrincipal.gerenciarPreset;
+package main.view.telaPrincipal.gerenciarPreset.incluirPreset;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,13 +25,14 @@ import main.utils.FileResourceUtils;
 import main.utils.TweetPreset;
 import main.utils.TweetPresetNode;
 import main.view.telaPrincipal.TelaPrincipalController;
-import main.view.telaPrincipal.gerenciarPreset.incluirPreset.IncluirPresetFactory;
+import main.view.telaPrincipal.gerenciarPreset.GerenciarPresetController;
 
-public class GerenciarPresetController {
+public class IncluirPresetController {
 	
+	public static TweetPreset response = null;
 	
 	private List<TweetPresetNode> presets;
-	private TelaPrincipalController pai;
+	private GerenciarPresetController pai;
 	
 	@FXML
 	private BorderPane rootPane;
@@ -39,20 +40,13 @@ public class GerenciarPresetController {
 	@FXML 
 	private TreeView<TweetPreset> presetList;
 	
-	public GerenciarPresetController(List<TweetPresetNode> presets, TelaPrincipalController pai) {
+	public IncluirPresetController(List<TweetPresetNode> presets, GerenciarPresetController pai) {
 		this.presets = (presets == null) ? Arrays.asList() : new ArrayList<>(presets);
 		this.pai = pai;
 	}
     
 	@FXML
 	public void initialize() {
-		presetList.setCellFactory(new GerenciarPresetTreeCellFactory());
-				
-		TreeItem<TweetPreset> root = new TreeItem<TweetPreset>();
-		root.setExpanded(true);
-		presetList.setRoot(root);
-		presetList.setShowRoot(false);
-		
 		update();
 	}
 	
@@ -96,7 +90,7 @@ public class GerenciarPresetController {
 	@FXML
 	public void doIncluirPreset(ActionEvent event) {
 		
-		IncluirPresetFactory.createView(null, this);
+		IncluirPresetFactory.createView(null, pai);
 		
 //		TreeItem<TweetPreset> tiTweetPreset = this.presetList.getSelectionModel().getSelectedItem();
 //		TweetPresetNode node = getNodeByTreeItem(tiTweetPreset);
@@ -188,8 +182,6 @@ public class GerenciarPresetController {
 	
 	public void update() {
 		
-		this.presetList.getRoot().getChildren().clear();
-		this.presetList.getRoot().getChildren().addAll(this.presets.stream().map(item -> item.toTreeItem()).collect(Collectors.toList()));
 	}
 	
 	
