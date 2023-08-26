@@ -1,7 +1,10 @@
 package main.view.telaPrincipal;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 import javafx.application.Platform;
@@ -23,7 +26,7 @@ public class TelaPrincipalFactory {
 			
 			Stage stage = new Stage();
 			stage.setTitle("PresetTweet");
-			stage.getIcons().add(new Image(FileResourceUtils.getFileFromPath(FileResourceUtils.LOGO_FILE).getAbsolutePath()));
+			stage.getIcons().add(FileResourceUtils.getImageFromPath(FileResourceUtils.LOGO_FILE));
 			stage.setScene(new Scene(root, 600, 500));
 			stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 				

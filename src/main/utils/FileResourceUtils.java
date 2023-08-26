@@ -1,6 +1,8 @@
 package main.utils;
 
 import java.io.BufferedOutputStream;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -12,12 +14,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.imageio.ImageIO;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 
+import javafx.scene.image.Image;
 import main.Main;
 
 public class FileResourceUtils {
@@ -158,6 +163,21 @@ public class FileResourceUtils {
 		} else {
 			return new File(path);
 		}
+	}
+	
+	
+	public static Image getImageFromPath(String path) {		
+		File fileImage = getFileFromPath(path);
+		
+		ByteArrayOutputStream os = new ByteArrayOutputStream();
+		try {
+			ImageIO.write(ImageIO.read(fileImage), path.split("[.]")[1], os);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+		return new Image(new ByteArrayInputStream(os.toByteArray()));
 	}
 	
 	

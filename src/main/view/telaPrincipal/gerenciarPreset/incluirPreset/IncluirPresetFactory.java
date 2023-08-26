@@ -26,7 +26,7 @@ public class IncluirPresetFactory {
 			Parent root = (Parent) fxmlLoader.load();
 
 			Stage stage = new Stage();
-			stage.getIcons().add(new Image(FileResourceUtils.getFileFromPath(FileResourceUtils.LOGO_FILE).getAbsolutePath()));
+			stage.getIcons().add(FileResourceUtils.getImageFromPath(FileResourceUtils.LOGO_FILE));
 			stage.setScene(new Scene(root));
 			stage.setTitle("Incluir Preset");
 			stage.setResizable(false);

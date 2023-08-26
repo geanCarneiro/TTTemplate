@@ -228,7 +228,7 @@ public class CreateTweetController {
 				Platform.runLater(() -> AlertFactory.createErrorAlert("Erro ao postar Tweet!!"));
 			}
 			
-			limparCampos();
+			Platform.runLater(() -> limparCampos()) ;
 		});
 		
 	}
@@ -244,11 +244,12 @@ public class CreateTweetController {
 			Platform.runLater(() -> AlertFactory.createInformationAlert("Tweet copiado com sucesso!!"));
 			
 			
-			limparCampos();
+//			Platform.runLater(() -> limparCampos()) ;
 		});
 		
 	}
 	
+	@FXML
 	private void limparCampos() {
 		
 		for(Node n : this.campos.values()) {

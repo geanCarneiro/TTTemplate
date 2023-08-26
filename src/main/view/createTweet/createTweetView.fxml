@@ -28,6 +28,7 @@
 	    <HBox spacing="10" GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.columnSpan="2" alignment="CENTER">
 		    <Button fx:id="btnGerarTweet" text="Gerar Tweet" onAction="#gerarTweet" />
 	    	<Button text="Copiar Tweet" onAction="#CopiarTweet" />
+	    	<Button text="Limpar Campos" onAction="#limparCampos" />
 	    </HBox>
 		
 
