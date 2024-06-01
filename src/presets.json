@@ -1,0 +1,13 @@
+[ {
+  "nome" : "Exemplos de Preset",
+  "presets" : [ {
+    "nome" : "Aniversario",
+    "preset" : "{nome:lnome} fez {idade:n} no dia {aniversario:ddd/MM} e comeu {o_que_ele_comeu}",
+    "midia" : true
+  }, {
+    "nome" : "dia do feriado",
+    "preset" : "{dia:d} será {feriado}",
+    "midia" : false
+  } ],
+  "midia" : false
+} ]
